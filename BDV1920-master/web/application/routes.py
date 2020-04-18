@@ -59,8 +59,10 @@ def home():
 @app.route('/about', methods=['GET'])
 def about():
     logger.info("About")
+    listing = datamodel.getCountryListining()
     return render_template('about.html',
                             title=title,
+                            data=listing,
                             template='about-template'
                         )
 
