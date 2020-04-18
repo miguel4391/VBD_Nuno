@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block pagestyles %}
+
+<!-- Our own styles -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<style>
+    #vis1_id {
+        width: 800px;
+        height: 600px;
+    }
+    #vis2_id {
+        width: 800px;
+        height: 600px;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<!-- see https://www.w3schools.com/bootstrap/default.asp for information -->
+
+<!-- Container -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-6" id="filtering_id">
+            <h5>Data to visualize</h5>
+            <form action="/filtering" method="POST">
+                <div class="container">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="selectButton">
+                        </select>
+                        <div class="input-group-append">
+                        <label class="input-group-text" for="selectButton">Country</label>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="cumulative" name="scope" checked>
+                        <label class="custom-control-label" for="cumulative">Cumulative</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="overtime" name="scope">
+                        <label class="custom-control-label" for="overtime">Over time</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <h5>Trasintion Time</h5>
+            <input type="range" class="form-control-range" id="selectTime" min="1000" max="5000" value="1000">
+            <input type="text" readonly value="1000" id="showTime">
+        </div>
+    </div>  
+
+    <br>
+    
+    <div class="row" id="vis1_id"></div>
+
+    <div class="row" id="vis2_id"></div>
+    <br>
+
+</div>
+
+<!-- now, the Javascript code to deal with user interface / visualization -->
+
+    
+    <!-- for D3 visualization -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!--<script src="{{ url_for('static', filename='dist/js/d3.min.js') }}"></script>-->
+
+    <!-- our own JavaScript functions -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- this is where data is passed from Flask templates to our js code -->
+    <script>
+        drawData({{ data | safe }});
+    </script>
+
+{% endblock %}
+
