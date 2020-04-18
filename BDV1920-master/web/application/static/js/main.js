@@ -123,7 +123,17 @@ function updateData(data){
         .attr("stroke", "steelblue")
         .style("stroke-width", 4)
         .style("fill", "none")
-    
+
+        
+        svg.append('text')
+        .attr('x', (width / 2))
+        .attr("y", 0 - (margin.top - 20))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .style("fill", "black")
+        .text("Confirmed");
+
         function update(dlist){
             dlist = setData(dlist)
            
