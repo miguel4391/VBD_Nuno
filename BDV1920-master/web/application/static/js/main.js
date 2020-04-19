@@ -37,6 +37,7 @@ d3.select("#selectTime").on("change", function(d) {
     time = d3.select(this).property("value")
 })
 
+// Função para preencher o array de paises
 function setCountryList(data){
     data = d3.entries(data);
 
@@ -45,8 +46,9 @@ function setCountryList(data){
     });
 }
 
-function drawData(data) {
 
+function drawData(data) {
+    
     setCountryList(data);
 
     originalData = data;
